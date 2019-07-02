@@ -15,14 +15,6 @@ public abstract class Renderable implements Engine{
 	protected Renderable(Vector pos) {
 		this.pos = pos;
 	}
-	
-	public double getX() {
-		return pos.getX();
-	}
-	
-	public double getY() {
-		return pos.getY();
-	}
 
 	public Vector getPos() {
 		return pos;

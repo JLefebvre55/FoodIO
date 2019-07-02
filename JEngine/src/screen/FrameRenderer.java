@@ -4,14 +4,16 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import geometry.Vector;
 import objects.ImageObject;
 
 /**
- * Renderer for screen frames. ALL update calls use this.
+ * Renderer for screen frames. ALL update calls must use this.
  * @author jaydenlefebvre
- *
+ * TODO separate thread for graphics
  */
 public class FrameRenderer {
+	
 	private BufferedImage frame;
 	private Graphics2D frameg;
 
@@ -42,8 +44,8 @@ public class FrameRenderer {
 	 * @param x
 	 * @param y
 	 */
-	public void renderImage(BufferedImage image, double x, double y) {
-		frameg.drawImage(image, (int)x, (int)y, null);
+	public void renderImage(BufferedImage image, Vector pos) {
+		frameg.drawImage(image, (int)pos.getX(), (int)pos.getY(), null);
 	}
 
 	/**
@@ -51,7 +53,7 @@ public class FrameRenderer {
 	 * @param e - Object to render
 	 */
 	public void renderImageObject(ImageObject e) {
-		frameg.drawImage(e.getImage(), (int)e.getX(), (int)e.getY(), null);
+		frameg.drawImage(e.getImage(), (int)e.getPos().getX(), (int)e.getPos().getY(), null);
 	}
 
 	/**
