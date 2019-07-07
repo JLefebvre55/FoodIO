@@ -3,6 +3,10 @@ package screen;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import geometry.Vector;
 import objects.ImageObject;
@@ -62,5 +66,17 @@ public class FrameRenderer {
 	 */
 	public BufferedImage getFrame() {
 		return frame;
+	}
+	
+	/**
+	 * Get the drawing object
+	 * @return
+	 */
+	public Graphics2D getGraphics() {
+		return frameg;
+	}
+	
+	public Vector getCenter() {
+		return new Vector(frame.getWidth()/2, frame.getHeight()/2);
 	}
 }

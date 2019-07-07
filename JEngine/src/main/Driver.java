@@ -5,32 +5,38 @@ import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 
-import objects.*;
-import objects.UILayer.UILayerID;
-import screen.*;
+import components.Component;
+import objects.RenderLayer;
+import objects.RenderLayer.LayerID;
+import objects.RenderObject;
+import screen.FrameRenderer;
+import screen.Window;
+import stage.ImageTest;
+import stage.Stage;
 
 /**
  * Starts the thread, makes the window, registers the objects, runs the updates.
  * @author jaydenlefebvre
  * TODO scale? i.e. smaller screen; objects are shrunk to scale
  * TODO UI layers
+ * TODO toString methods!!
  */
-public class Driver implements Runnable, Engine{
+public class Driver implements Runnable, Renderable{
 
 	//Screen vars
 	private static double aspectratio = 16.0/9.0;
 	private static int width = 1280, height = (int)(width/aspectratio);
-	private static String title = "JGraphics";
 	private Window window;
-	private Color bgcolor = Color.LIGHT_GRAY;
+	private Color bgcolor = Color.GRAY;
 
 	//Runtime vars
 	private boolean running;
 	private static final long FUPDATE_NLENGTH = 10000000;
 	private Thread thread;
+	private Stage currentStage;
+	private ArrayList<RenderLayer> renderlayers = new ArrayList<RenderLayer>();
+	private ArrayList<Renderable> fupdateobjects = new ArrayList<Renderable>();
 
-	//All renderable objects
-	private ArrayList<UILayer> layers = new ArrayList<UILayer>();
 
 	/**
 	 * Starts the driver
@@ -73,7 +79,7 @@ public class Driver implements Runnable, Engine{
 			}
 
 			//Update AFTER FUpdate
-			update(new FrameRenderer(width, height, bgcolor));
+			update(new FrameRenderer(width, height));
 
 			//frames generated increment
 			fps++;
@@ -81,7 +87,7 @@ public class Driver implements Runnable, Engine{
 			//Slow update
 			if(System.currentTimeMillis() - lastSlowUpdate >= 1000) {
 				//Set screen head, reset counter
-				window.getFrame().setTitle(title+"\t"+fps+"FPS");
+				window.getFrame().setTitle(currentStage.getStageID()+"\t"+fps+"FPS");
 				lastSlowUpdate = System.currentTimeMillis();
 				fps = 0;
 			}
@@ -91,9 +97,11 @@ public class Driver implements Runnable, Engine{
 	@Override
 	public void update(FrameRenderer screen) {
 		//Renders each layer in order
-		for(int i = 0; i < UILayerID.size(); i++) {
-			for(UILayer layer : layers) {
+		for(int i = 0; i < LayerID.size(); i++) {
+			for(RenderLayer layer : renderlayers ) {
+				//Find first layer
 				if(layer.getLayerID().ordinal() == i) {
+					//Do all
 					for(Renderable e : layer) {
 						e.update(screen);
 					}
@@ -103,16 +111,13 @@ public class Driver implements Runnable, Engine{
 		}
 		BufferStrategy bs = window.getCanvas().getBufferStrategy();
 		bs.getDrawGraphics().drawImage(screen.getFrame(), 0, 0, width, height, null);
+		bs.getDrawGraphics().dispose();
 		bs.show();
 	}
 
 	@Override
 	public void fixedUpdate() {
-		for(UILayer layer : layers) {
-			for(Renderable i : layer) {
-				i.fixedUpdate();
-			}
-		}
+		currentStage.fixedUpdate();
 	}
 
 	/**
@@ -120,17 +125,22 @@ public class Driver implements Runnable, Engine{
 	 */
 	private void init() {
 		running = true;
-		window = new Window(title, width, height);
+
+		//Set up layering and registry
+		for(int i = 0; i < LayerID.size(); i++) {
+			renderlayers.add(new RenderLayer(LayerID.getLayerID(i)));
+		}
+
+		//Set up stage
+		currentStage = new ImageTest();
+		registerStage(currentStage);
+
+		window = new Window(currentStage.getStageID(), width, height);
 		window.getCanvas().createBufferStrategy(3);
 
 		//Flush out some frames before we make it visible
 		flushFrames();
 		window.getFrame().setVisible(true);
-
-		//Set up layering and registry
-		for(int i = 0; i < UILayerID.size(); i++) {
-			layers.add(new UILayer(UILayerID.getLayerID(i)));
-		}
 	}
 
 	/**
@@ -138,7 +148,7 @@ public class Driver implements Runnable, Engine{
 	 */
 	private void flushFrames() {
 		for(int i = 0; i < 4; i++) {
-			update(new FrameRenderer(width, height, bgcolor));
+			update(new FrameRenderer(width, height));
 		}
 	}
 
@@ -147,13 +157,34 @@ public class Driver implements Runnable, Engine{
 	 * @param e - object
 	 * @param id - ui layer to render on
 	 */
-	public void registerObject(Renderable e, UILayerID id) {
-		for(UILayer layer : layers) {
-			if(layer.getLayerID().equals(id)) {
+	public void registerObject(RenderObject e) {
+		for(RenderLayer layer : renderlayers) {
+			if(layer.getLayerID().equals(e.getLayerID())) {
 				layer.add(e);
+				fupdateobjects.add(e);
+				System.out.println("Registered an object: "+e);
 				break;
 			}
 		}
+		for(Component c : e.getComponents()) {
+			if(c.isGraphical()) {
+				for(RenderLayer layer : renderlayers) {
+					if(layer.getLayerID().equals(LayerID.GUI)) {
+						layer.add(c);
+					}
+				}
+			}
+		}
+	}
+
+	public void registerStage(Stage s) {
+		ArrayList<RenderObject> o = s.getObjects();
+
+		for(RenderObject e : o) {
+			registerObject(e);
+		}
+
+		System.out.println("Registered stage: "+s.getStageID());
 	}
 
 }

@@ -3,7 +3,7 @@ package geometry;
 /**
  * Stores a 2D vector.
  * @author jaydenlefebvre
- *
+ * TODO Point child class??
  */
 public class Vector {
 
@@ -18,15 +18,6 @@ public class Vector {
 		super();
 		this.x = x;
 		this.y = y;
-	}
-	
-	/**
-	 * Basic trig, makes a vector using an angle and a sum (hypotenuse)
-	 * @param sum
-	 * @param a
-	 */
-	public Vector(double sum, Angle a) {
-		this(sum*Math.sin(a.getAngle()), sum*Math.cos(a.getAngle()));
 	}
 
 	/**
@@ -57,17 +48,25 @@ public class Vector {
 		this.y = y;
 	}
 	
-	public void add(Vector v2) {
-		this.x += v2.getX();
-		this.y += v2.getY();
+	public Vector add(Vector v2) {
+		return new Vector(this.x + v2.getX(), this.y + v2.getY());
 	}
 	
-	public Vector sub(double div) {
-		return new Vector(x/div, y/div);
+	public Vector subtract(Vector v2) {
+		return new Vector(this.x - v2.getX(), this.y - v2.getY());
+	}
+	
+	public Vector scale(double d){
+		return new Vector(this.x*d, this.y*d);
 	}
 	
 	@Override
 	public String toString() {
 		return "("+x+","+y+")";
+	}
+
+	public double getDistance(Vector v2) {
+		// TODO Auto-generated method stub
+		return Math.sqrt(Math.pow(x+v2.getX(), 2)+Math.pow(y+v2.getY(), 2));
 	}
 }
