@@ -41,4 +41,8 @@ public class CircleCollider extends Collider {
 		screen.getGraphics().setColor(Collider.DRAWCOLOR);
 		screen.getGraphics().drawArc((int)pos.getX(), (int)pos.getY(), (int)(2*radius), (int)(2*radius), 0, 360);
 	}
+	
+	public String toString(){
+		return "Circle "+super.toString();
+	}
 }

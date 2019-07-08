@@ -3,13 +3,13 @@ import java.awt.Color;
 
 import components.FollowComponent;
 import geometry.Vector;
+import main.Driver;
 import objects.RenderObject;
 import screen.FrameRenderer;
 
 public abstract class Collider extends FollowComponent {
 
 	protected boolean isSolid;
-	public static boolean DRAWCOLLIDERS = true;
 	public static final Color DRAWCOLOR = Color.GREEN;
 	
 	public Collider(RenderObject parent) {
@@ -23,12 +23,14 @@ public abstract class Collider extends FollowComponent {
 	}
 	
 	public void update(FrameRenderer screen) {
-		if(DRAWCOLLIDERS) {
+		if(Driver.DEBUG) {
 			drawCollider(screen);
 		}
 	}
 	
-	public void fixedUpdate() {};
+	public void fixedUpdate() {
+		
+	};
 
 	//ALL ABSTRACTS FOR COLLISIONS WITH ALL TYPES
 	
@@ -40,4 +42,7 @@ public abstract class Collider extends FollowComponent {
 	
 	abstract public void drawCollider(FrameRenderer screen);
 
+	public String toString() {
+		return "Collider "+super.toString();
+	}
 }

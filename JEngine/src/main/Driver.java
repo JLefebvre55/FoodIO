@@ -6,6 +6,8 @@ import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 
 import components.Component;
+import components.Keyboard;
+import objects.Ball;
 import objects.RenderLayer;
 import objects.RenderLayer.LayerID;
 import objects.RenderObject;
@@ -31,6 +33,7 @@ public class Driver implements Runnable, Renderable{
 	//Runtime vars
 	private boolean running;
 	private static final long FUPDATE_NLENGTH = 10000000;
+	public static final boolean DEBUG = true;
 	private Thread thread;
 	private Stage currentStage;
 	private ArrayList<RenderLayer> renderlayers = new ArrayList<RenderLayer>();
@@ -87,6 +90,11 @@ public class Driver implements Runnable, Renderable{
 			if(System.currentTimeMillis() - lastSlowUpdate >= 1000) {
 				//Set screen head, reset counter
 				window.getFrame().setTitle(currentStage.getStageID()+"\t"+fps+"FPS");
+				for(Renderable e : fupdateobjects) {
+					if(e instanceof Ball) {
+						System.out.println(((Ball)e).getPos());
+					}
+				}
 				lastSlowUpdate = System.currentTimeMillis();
 				fps = 0;
 			}
@@ -132,10 +140,11 @@ public class Driver implements Runnable, Renderable{
 
 		//Set up stage
 		currentStage = new ImageTest();
-		registerStage(currentStage);
-
+		
 		window = new Window(currentStage.getStageID(), width, height);
 		window.getCanvas().createBufferStrategy(3);
+		
+		registerStage(currentStage);
 
 		//Flush out some frames before we make it visible
 		flushFrames();
@@ -161,15 +170,21 @@ public class Driver implements Runnable, Renderable{
 			if(layer.getLayerID().equals(e.getLayerID())) {
 				layer.add(e);
 				fupdateobjects.add(e);
-				System.out.println("Registered an object: "+e);
+				if(DEBUG)
+					System.out.println("Registered an object: "+e);
 				break;
 			}
 		}
 		for(Component c : e.getComponents()) {
+			if(c instanceof Keyboard) {
+				window.getCanvas().addKeyListener((Keyboard)c);
+			}
 			if(c.isGraphical()) {
 				for(RenderLayer layer : renderlayers) {
 					if(layer.getLayerID().equals(LayerID.GUI)) {
 						layer.add(c);
+						if(DEBUG)
+							System.out.println("- Registered a component: "+c);
 					}
 				}
 			}
@@ -182,8 +197,8 @@ public class Driver implements Runnable, Renderable{
 		for(RenderObject e : o) {
 			registerObject(e);
 		}
-
-		System.out.println("Registered stage: "+s.getStageID());
+		if(DEBUG)
+			System.out.println("Registered stage: "+s.getStageID());
 	}
 
 }

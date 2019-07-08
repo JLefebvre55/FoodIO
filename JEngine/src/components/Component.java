@@ -20,4 +20,8 @@ public abstract class Component implements Renderable{
 		return GRAPHICAL;
 	}
 	
+	public String toString() {
+		return "Component";
+	}
+	
 }

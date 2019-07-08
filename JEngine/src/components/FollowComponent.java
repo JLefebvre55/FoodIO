@@ -11,6 +11,7 @@ import objects.RenderObject;
 public abstract class FollowComponent extends Component {
 
 	protected Vector pos, delta;
+	private RenderObject parent;
 
 	/**
 	 * Makes a zero-delta attached component
@@ -28,11 +29,12 @@ public abstract class FollowComponent extends Component {
 	public FollowComponent(RenderObject parent, Vector delta, boolean g) {
 		super(g);
 		this.delta = delta;
+		this.parent = parent;
 		this.pos = parent.getPos().add(delta);
 	}
 
-	public void followObject(RenderObject e) {
-		this.pos = e.getPos().add(delta);
+	public void fixedUpdate() {
+		this.pos = parent.getPos().add(delta);
 	}
 
 }
