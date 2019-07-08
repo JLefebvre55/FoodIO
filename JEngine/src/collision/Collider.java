@@ -27,10 +27,6 @@ public abstract class Collider extends FollowComponent {
 			drawCollider(screen);
 		}
 	}
-	
-	public void fixedUpdate() {
-		
-	};
 
 	//ALL ABSTRACTS FOR COLLISIONS WITH ALL TYPES
 	

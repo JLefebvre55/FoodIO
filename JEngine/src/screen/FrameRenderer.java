@@ -3,10 +3,6 @@ package screen;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import geometry.Vector;
 import objects.ImageObject;
@@ -27,8 +23,7 @@ public class FrameRenderer {
 	 * @param height in px
 	 */
 	public FrameRenderer(int width, int height) {
-		this.frame = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		frameg = frame.createGraphics();
+		this(width, height, Color.WHITE);
 	}
 
 	/**
@@ -37,7 +32,8 @@ public class FrameRenderer {
 	 * @param height in px
 	 */
 	public FrameRenderer(int width, int height, Color bgcolor) {
-		this(width, height);
+		this.frame = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		frameg = frame.createGraphics();
 		frameg.setColor(bgcolor);
 		frameg.fillRect(0, 0, width, height);
 	}

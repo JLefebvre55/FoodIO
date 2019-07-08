@@ -11,9 +11,11 @@ import objects.RenderObject;
 public abstract class Component implements Renderable{
 
 	private final boolean GRAPHICAL;
+	protected RenderObject parent;
 	
-	public Component(boolean graphical) {
+	public Component(RenderObject parent, boolean graphical) {
 		this.GRAPHICAL = graphical;
+		this.parent = parent;
 	}
 	
 	public boolean isGraphical() {
@@ -22,6 +24,10 @@ public abstract class Component implements Renderable{
 	
 	public String toString() {
 		return "Component";
+	}
+	
+	public RenderObject getParent() {
+		return parent;
 	}
 	
 }

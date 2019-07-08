@@ -3,11 +3,14 @@ package stage;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import collision.CircleCollider;
+import collision.Collider;
 import main.Renderable;
 import objects.RenderObject;
 import screen.FrameRenderer;
+import collision.CollisionDetection;
 
-public abstract class Stage implements Renderable{
+public abstract class Stage {
 
 	private ArrayList<RenderObject> objects = new ArrayList<RenderObject>();
 	private String stageID;
@@ -19,7 +22,7 @@ public abstract class Stage implements Renderable{
 		hasBackground = true;
 		this.bgcolor = bgcolor;
 	}
-	
+
 	public Stage(String stageID) {
 		this.stageID = stageID;
 		hasBackground = false;
@@ -28,30 +31,13 @@ public abstract class Stage implements Renderable{
 	public Stage() {
 		this("Stage");
 	}
-	
+
 	public Stage(Color bgcolor) {
 		this("Stage", bgcolor);
 	}
 
 	public ArrayList<RenderObject> getObjects(){
 		return objects;
-	}
-
-	@Override
-	public void update(FrameRenderer screen) {
-		// TODO Auto-generated method stub
-		for(RenderObject e : objects) {
-			e.update(screen);
-		}
-	}
-
-	@Override
-	public void fixedUpdate() {
-		// TODO Auto-generated method stub
-		for(RenderObject e : objects) {
-			e.fixedUpdate();
-			e.fupdateComponents();
-		}
 	}
 
 	public String getStageID() {

@@ -49,5 +49,15 @@ public abstract class RenderObject implements Renderable{
 			c.fixedUpdate();
 		}
 	}
+	
+	public <T> ArrayList<T> getComponentsByType(Class<T> a){
+		ArrayList<T> temp = new ArrayList<T>();
+		for(Component c : components) {
+			if(a.isInstance(c)) {
+				temp.add((T)c);
+			}
+		}
+		return temp;
+	}
 
 }

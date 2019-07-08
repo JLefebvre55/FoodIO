@@ -67,6 +67,6 @@ public class Vector {
 
 	public double getDistance(Vector v2) {
 		// TODO Auto-generated method stub
-		return Math.sqrt(Math.pow(x+v2.getX(), 2)+Math.pow(y+v2.getY(), 2));
+		return Math.sqrt(Math.pow(x-v2.getX(), 2)+Math.pow(y-v2.getY(), 2));
 	}
 }

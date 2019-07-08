@@ -18,7 +18,7 @@ public class Keyboard extends Component implements KeyListener{
 	private boolean arrowup, arrowdown, arrowleft, arrowright, moveup, movedown, moveleft, moveright, action;//boolean for if pressed or not
 
 	public Keyboard() {
-		super(false);
+		super(null, false);
 	}
 
 	/**
