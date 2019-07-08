@@ -14,7 +14,8 @@ import screen.FrameRenderer;
 
 public abstract class ImageObject extends RenderObject {
 
-	private BufferedImage image;
+	protected BufferedImage srcimage;
+	protected double scale;
 
 	/**
 	 * Makes image object based on position and source image
@@ -22,18 +23,11 @@ public abstract class ImageObject extends RenderObject {
 	 * @param image
 	 */
 	public ImageObject(Vector pos, BufferedImage image, LayerID layerid) {
-		super(pos, layerid);
-		this.image = image;
+		this(pos, image, layerid, 1);
 	}
 
 	public ImageObject(Vector pos, String url, LayerID layerid) {
-		super(pos, layerid);
-		try {
-			this.image = ImageIO.read(new File(url));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this(pos, url, layerid, 1);
 	}
 
 	/**
@@ -43,72 +37,45 @@ public abstract class ImageObject extends RenderObject {
 	 */
 	public ImageObject(Vector pos, BufferedImage image, LayerID layerid, double scale) {
 		super(pos, layerid);
-		scale = scale > 1 ? 1 : scale <=0 ? 0 : scale;
+
+		this.srcimage = image;
+		this.scale = scale;
+
+	}
+
+	public static BufferedImage scaleImage(BufferedImage image, double scale) {
+		// TODO Auto-generated method stub
+		scale = scale <=0 ? 1 : scale;
 		AffineTransform resize = AffineTransform.getScaleInstance(scale, scale);
 		AffineTransformOp op = new AffineTransformOp (
 				resize,
 				AffineTransformOp.TYPE_BICUBIC);
-
-		this.image = op.filter(image, null);
-
+		return op.filter(image, null);
 	}
 
 	public ImageObject(Vector pos, String url, LayerID layerid, double scale) {
 		super(pos, layerid);
-
+		this.scale = scale;
 		try {
-			BufferedImage img = ImageIO.read(new File(url));
-			scale = scale > 1 ? 1 : scale <=0 ? 0 : scale;
-			AffineTransform resize = AffineTransform.getScaleInstance(scale, scale);
-			AffineTransformOp op = new AffineTransformOp (
-					resize,
-					AffineTransformOp.TYPE_BICUBIC);
-			this.image = op.filter(img, null);
+			this.srcimage = ImageIO.read(new File(url));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-	}
-
-	public ImageObject(Vector pos, String url, LayerID layerid, int sizex, int sizey) {
-		super(pos, layerid);
-		try {
-			BufferedImage img = ImageIO.read(new File(url));
-			sizex = sizex < 1 ? 1 : sizex;
-			sizey = sizey < 1 ? 1 : sizey;
-			AffineTransform resize = AffineTransform.getScaleInstance((double)sizex/img.getWidth(), (double)sizey/img.getHeight());
-			AffineTransformOp op = new AffineTransformOp (
-					resize,
-					AffineTransformOp.TYPE_BICUBIC);
-
-			this.image = op.filter(img, null);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	public ImageObject(Vector pos, BufferedImage image, LayerID layerid, int sizex, int sizey) {
-		super(pos, layerid);
-		sizex = sizex < 1 ? 1 : sizex;
-		sizey = sizey < 1 ? 1 : sizey;
-		AffineTransform resize = AffineTransform.getScaleInstance((double)sizex/image.getWidth(), (double)sizey/image.getHeight());
-		AffineTransformOp op = new AffineTransformOp (
-				resize,
-				AffineTransformOp.TYPE_BICUBIC);
-		this.image = op.filter(image, null);
 
 	}
 
 	@Override
 	public void update(FrameRenderer screen) {
-		screen.renderImageObject(this);
+		screen.getGraphics().drawImage(getImage(), (int)pos.getX(), (int)pos.getY(), null);
+	}
+
+	public BufferedImage getSourceImage() {
+		return srcimage;
 	}
 
 	public BufferedImage getImage() {
-		return image;
+		return scaleImage(srcimage, scale);
 	}
 
 	public String toString() {

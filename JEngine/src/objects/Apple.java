@@ -12,17 +12,11 @@ public class Apple extends ImageObject implements CollisionDetection{
 
 	private Keyboard keyboard = new Keyboard();
 	private double speed = 2;
-	private double radius;
 	
 	public Apple(Vector pos) {
-		this(pos, 25);
-	}
-	
-	public Apple(Vector pos, int radius) {
-		super(pos, "apple.png", LayerID.OBJECTS, 2*radius, 2*radius);
-		addComponent(new CircleCollider(this, radius+3));
+		super(pos, "apple.png", LayerID.OBJECTS, 0.05);
+		addComponent(new CircleCollider(this, 53));
 		addComponent(keyboard);
-		this.radius = radius;
 	}
 
 	@Override
@@ -42,7 +36,7 @@ public class Apple extends ImageObject implements CollisionDetection{
 	}
 	
 	public String toString() {
-		return "Apple "+super.toString();
+		return "Apple";
 	}
 
 	@Override

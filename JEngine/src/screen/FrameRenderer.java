@@ -49,14 +49,6 @@ public class FrameRenderer {
 	}
 
 	/**
-	 * Renders an object to frame
-	 * @param e - Object to render
-	 */
-	public void renderImageObject(ImageObject e) {
-		frameg.drawImage(e.getImage(), (int)e.getPos().getX(), (int)e.getPos().getY(), null);
-	}
-
-	/**
 	 * Get rendered frame
 	 * @return rendered frame
 	 */
