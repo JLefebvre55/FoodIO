@@ -27,7 +27,6 @@ public class Driver implements Runnable, Renderable{
 	private static double aspectratio = 16.0/9.0;
 	private static int width = 1280, height = (int)(width/aspectratio);
 	private Window window;
-	private Color bgcolor = Color.GRAY;
 
 	//Runtime vars
 	private boolean running;
@@ -79,7 +78,7 @@ public class Driver implements Runnable, Renderable{
 			}
 
 			//Update AFTER FUpdate
-			update(new FrameRenderer(width, height));
+			update(currentStage.getFrameRenderer(width, height));
 
 			//frames generated increment
 			fps++;

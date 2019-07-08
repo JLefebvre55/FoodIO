@@ -3,7 +3,6 @@ import java.awt.Color;
 
 import components.FollowComponent;
 import geometry.Vector;
-import main.Renderable;
 import objects.RenderObject;
 import screen.FrameRenderer;
 

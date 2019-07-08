@@ -16,6 +16,7 @@ public class Ball extends RenderObject {
 		super(pos, LayerID.OBJECTS);
 		addComponent(new CircleCollider(this, radius));
 		this.color = color;
+		this.radius = radius;
 	}
 
 	@Override

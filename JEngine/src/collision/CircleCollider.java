@@ -1,7 +1,5 @@
 package collision;
 
-import java.awt.Color;
-
 import geometry.Vector;
 import objects.RenderObject;
 import screen.FrameRenderer;
