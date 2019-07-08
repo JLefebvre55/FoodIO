@@ -25,6 +25,7 @@ import stage.Stage;
  * TODO change all static
  * TODO Collision object??
  * TODO Comments (class and method), private/public rejig
+ * TODO more debug messages
  */
 public class Driver {
 

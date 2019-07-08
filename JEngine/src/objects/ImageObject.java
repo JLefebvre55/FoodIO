@@ -45,12 +45,23 @@ public abstract class ImageObject extends RenderObject {
 
 	public static BufferedImage scaleImage(BufferedImage image, double scale) {
 		// TODO Auto-generated method stub
-		scale = scale <=0 ? 1 : scale;
-		AffineTransform resize = AffineTransform.getScaleInstance(scale, scale);
-		AffineTransformOp op = new AffineTransformOp (
-				resize,
-				AffineTransformOp.TYPE_BICUBIC);
-		return op.filter(image, null);
+		if(scale <=0) {
+			return image;
+		}else if (scale < 1) {
+			AffineTransform resize = AffineTransform.getScaleInstance(scale, scale);
+			AffineTransformOp op = new AffineTransformOp (
+					resize,
+					AffineTransformOp.TYPE_BICUBIC);
+			return op.filter(image, null);
+		}else if (scale == 1) {
+			return image;
+		} else {
+			AffineTransform resize = AffineTransform.getScaleInstance(scale, scale);
+			AffineTransformOp op = new AffineTransformOp (
+					resize,
+					AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+			return op.filter(image, null);
+		}
 	}
 
 	public ImageObject(Vector pos, String url, LayerID layerid, double scale) {
