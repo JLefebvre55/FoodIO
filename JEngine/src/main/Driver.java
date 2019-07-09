@@ -3,18 +3,18 @@ package main;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 
-import collision.CircleCollider;
-import collision.Collider;
-import collision.CollisionDetection;
 import components.Component;
 import components.Keyboard;
-import objects.RenderLayer;
-import objects.RenderLayer.LayerID;
+import components.collision.CircleCollider;
+import components.collision.Collider;
+import components.collision.CollisionDetection;
+import main.rendering.FrameRenderer;
+import main.rendering.RenderLayer;
+import main.rendering.Window;
+import main.rendering.RenderLayer.LayerID;
 import objects.RenderObject;
-import screen.FrameRenderer;
-import screen.Window;
-import stage.GameTest;
-import stage.Stage;
+import objects.stage.GameTest;
+import objects.stage.Stage;
 
 /**
  * Starts the thread, makes the window, registers the objects, runs the updates.
@@ -22,7 +22,7 @@ import stage.Stage;
  * TODO scale? i.e. smaller screen; objects are shrunk to scale
  * TODO UI layers
  * TODO toString methods!!
- * TODO change all static
+ * TODO change all static, maybe framerenderer as well
  * TODO Collision object??
  * TODO Comments (class and method), private/public rejig
  * TODO more debug messages
@@ -37,7 +37,7 @@ public class Driver {
 	//Runtime vars
 	private static boolean running;
 	private static final long FUPDATE_NLENGTH = 10000000;
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 	private static Stage currentStage;
 	private static ArrayList<RenderLayer> renderlayers = new ArrayList<RenderLayer>();
 	private static ArrayList<RenderObject> fupdateobjects = new ArrayList<RenderObject>();
@@ -106,7 +106,7 @@ public class Driver {
 			e.fixedUpdate();
 			e.fupdateComponents();
 		}
-		
+
 		//Collider specific
 		for(int i = 0; i < fupdateobjects.size(); i++) {
 			ArrayList<Collider> c1 = fupdateobjects.get(i).getComponentsByType(Collider.class);
@@ -116,17 +116,15 @@ public class Driver {
 					for(Collider cb : c2) {
 						//BY COLLIDER TYPE
 						//TODO generic call, then sort instanceof
-						if(cb instanceof CircleCollider) {
-							if(ca.isCollidingWith((CircleCollider)cb)){
-								CollisionDetection c = (CollisionDetection)ca.getParent();
-								c.collisionDetected(cb);
-								System.out.println(ca+" on "+ca.getParent()+" is colliding with "+cb+" on "+cb.getParent()+"!");
-							}
+						if(ca.isCollidingWith(cb)){
+							CollisionDetection c = (CollisionDetection)ca.getParent();
+							c.collisionDetected(cb);
+							System.out.println(ca+" on "+ca.getParent()+" is colliding with "+cb+" on "+cb.getParent()+"!");
 						}
 					}
 				}
 			}
-			
+
 		}
 	}
 
@@ -213,11 +211,17 @@ public class Driver {
 				break;
 			}
 		}
+		if(DEBUG) {
+			System.out.println("Removed object: "+e);
+		}
 
 		for(RenderLayer layer : renderlayers) {
 			if(layer.getLayerID().equals(LayerID.GUI)) {
 				for(Component c : e.getComponents()) {
 					layer.remove(c);
+					if(DEBUG) {
+						System.out.println("- Removed component: "+c);
+					}
 				}
 			}
 		}

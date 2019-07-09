@@ -1,11 +1,12 @@
-package objects;
+package objects.entities;
 
 import java.awt.Color;
 
-import collision.CircleCollider;
-import geometry.Vector;
-import objects.RenderLayer.LayerID;
-import screen.FrameRenderer;
+import components.collision.CircleCollider;
+import main.geometry.Vector;
+import main.rendering.FrameRenderer;
+import main.rendering.RenderLayer.LayerID;
+import objects.RenderObject;
 
 public class Ball extends RenderObject {
 
@@ -13,7 +14,7 @@ public class Ball extends RenderObject {
 	private double radius;
 
 	public Ball(Vector pos, Color color, double radius) {
-		super(pos, LayerID.OBJECTS);
+		super(pos, LayerID.CHARACTERS);
 		addComponent(new CircleCollider(this, radius));
 		this.color = color;
 		this.radius = radius;

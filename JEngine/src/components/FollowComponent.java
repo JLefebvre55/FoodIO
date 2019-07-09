@@ -1,6 +1,6 @@
 package components;
 
-import geometry.Vector;
+import main.geometry.Vector;
 import objects.RenderObject;
 
 /**
@@ -33,6 +33,10 @@ public abstract class FollowComponent extends Component {
 
 	public void fixedUpdate() {
 		this.pos = parent.getPos().add(delta);
+	}
+	
+	public Vector getPos() {
+		return pos;
 	}
 
 }

@@ -5,4 +5,4 @@
  * @author jaydenlefebvre
  *
  */
-package stage;
+package main.rendering;

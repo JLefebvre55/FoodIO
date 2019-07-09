@@ -1,10 +1,10 @@
-package screen;
+package main.rendering;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import geometry.Vector;
+import main.geometry.Vector;
 import objects.ImageObject;
 
 /**

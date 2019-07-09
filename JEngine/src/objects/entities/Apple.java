@@ -1,21 +1,22 @@
-package objects;
+package objects.entities;
 
-import collision.CircleCollider;
-import collision.Collider;
-import collision.CollisionDetection;
 import components.Keyboard;
-import geometry.Vector;
+import components.collision.CircleCollider;
+import components.collision.Collider;
+import components.collision.CollisionDetection;
 import main.Driver;
-import objects.RenderLayer.LayerID;
+import main.geometry.Vector;
+import main.rendering.RenderLayer.LayerID;
+import objects.ImageObject;
 
 public class Apple extends ImageObject implements CollisionDetection{
 
 	private Keyboard keyboard = new Keyboard();
-	private double speed = 2;
-	
+	private double speed = 2, radius = 50;
+
 	public Apple(Vector pos) {
-		super(pos, "apple.png", LayerID.OBJECTS, 0.05);
-		addComponent(new CircleCollider(this, 53));
+		super(pos, "apple.png", LayerID.CHARACTERS, 0.05);
+		addComponent(new CircleCollider(this, radius+3));
 		addComponent(keyboard);
 	}
 
@@ -32,9 +33,21 @@ public class Apple extends ImageObject implements CollisionDetection{
 		} else if(keyboard.isMoveright()) {
 			pos.setX(pos.getX()+speed);
 		}
-		
+
+		if(pos.getX() > Driver.getWidth()+radius*2) {
+			pos.setX(-radius*2);
+		} else if(pos.getX() < -radius*2){
+			pos.setX(Driver.getWidth()+radius*2);
+		}
+
+		if(pos.getY() > Driver.getHeight()+radius*2) {
+			pos.setY(-radius*2);
+		} else if(pos.getY() < -radius*2){
+			pos.setY(Driver.getHeight()+radius*2);
+		}
+
 	}
-	
+
 	public String toString() {
 		return "Apple";
 	}

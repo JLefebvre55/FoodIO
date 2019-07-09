@@ -8,9 +8,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import geometry.Vector;
-import objects.RenderLayer.LayerID;
-import screen.FrameRenderer;
+import main.geometry.Vector;
+import main.rendering.FrameRenderer;
+import main.rendering.RenderLayer.LayerID;
 
 public abstract class ImageObject extends RenderObject {
 

@@ -1,4 +1,4 @@
-package objects;
+package main.rendering;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ import main.Renderable;
 public class RenderLayer extends ArrayList<Renderable>{
 	
 	public static enum LayerID {
-		BACKGROUND, OBJECTS, GUI;
+		BACKGROUND, CHARACTERS, ITEMS, GUI;
 		
 		/**
 		 * Get the ordinal of a specific layer

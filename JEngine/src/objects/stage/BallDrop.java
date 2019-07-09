@@ -1,9 +1,9 @@
-package stage;
+package objects.stage;
 
 import java.awt.Color;
 
-import geometry.Vector;
-import objects.Ball;
+import main.geometry.Vector;
+import objects.entities.Ball;
 
 public class BallDrop extends Stage {
 

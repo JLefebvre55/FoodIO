@@ -1,14 +1,14 @@
-package stage;
+package objects.stage;
 
 import java.awt.Color;
 import java.util.ArrayList;
 
-import collision.CircleCollider;
-import collision.Collider;
+import components.collision.CircleCollider;
+import components.collision.Collider;
+import components.collision.CollisionDetection;
 import main.Renderable;
+import main.rendering.FrameRenderer;
 import objects.RenderObject;
-import screen.FrameRenderer;
-import collision.CollisionDetection;
 
 public abstract class Stage {
 

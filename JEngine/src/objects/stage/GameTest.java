@@ -1,12 +1,12 @@
-package stage;
+package objects.stage;
 
 import java.awt.Color;
 
-import geometry.Vector;
 import main.Driver;
-import objects.Apple;
-import objects.Coin;
+import main.geometry.Vector;
 import objects.Grid;
+import objects.entities.Apple;
+import objects.entities.Coin;
 
 public class GameTest extends Stage {
 	

@@ -3,9 +3,9 @@ package objects;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import geometry.Vector;
-import objects.RenderLayer.LayerID;
-import screen.FrameRenderer;
+import main.geometry.Vector;
+import main.rendering.FrameRenderer;
+import main.rendering.RenderLayer.LayerID;
 
 /**
  * Generic parent class for animated objects

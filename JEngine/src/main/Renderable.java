@@ -1,6 +1,6 @@
 package main;
 
-import screen.FrameRenderer;
+import main.rendering.FrameRenderer;
 
 /**
  * ALL renderable objects must utilize update to be updated by main class

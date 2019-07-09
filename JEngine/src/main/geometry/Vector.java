@@ -1,4 +1,4 @@
-package geometry;
+package main.geometry;
 
 /**
  * Stores a 2D vector.
@@ -18,6 +18,13 @@ public class Vector {
 		super();
 		this.x = x;
 		this.y = y;
+	}
+
+	/**
+	 * Make a (0,0) vector
+	 */
+	public Vector() {
+		this(0,0);
 	}
 
 	/**

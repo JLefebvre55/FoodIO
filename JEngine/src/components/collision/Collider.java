@@ -1,11 +1,11 @@
-package collision;
+package components.collision;
 import java.awt.Color;
 
 import components.FollowComponent;
-import geometry.Vector;
 import main.Driver;
+import main.geometry.Vector;
+import main.rendering.FrameRenderer;
 import objects.RenderObject;
-import screen.FrameRenderer;
 
 public abstract class Collider extends FollowComponent {
 
@@ -32,7 +32,7 @@ public abstract class Collider extends FollowComponent {
 	
 	abstract public boolean isCollidingWith(CircleCollider other);
 	
-	//abstract public boolean isCollidingWith(BoxCollider other);
+	abstract public boolean isCollidingWith(BoxCollider other);
 	
 	abstract public boolean isCollidingWith(Vector p);
 	
@@ -40,5 +40,15 @@ public abstract class Collider extends FollowComponent {
 
 	public String toString() {
 		return "Collider "+super.toString();
+	}
+
+	public boolean isCollidingWith(Collider cb) {
+		// TODO Auto-generated method stub
+		if(cb instanceof CircleCollider) {
+			return isCollidingWith((CircleCollider)cb);
+		} else if(cb instanceof BoxCollider) {
+			return isCollidingWith((BoxCollider)cb);
+		}
+		return false;
 	}
 }

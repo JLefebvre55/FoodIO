@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import main.Driver;
-import screen.FrameRenderer;
+import main.rendering.FrameRenderer;
 
 /**
  * Keyboard for IO

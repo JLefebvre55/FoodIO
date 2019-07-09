@@ -1,18 +1,20 @@
-package objects;
+package objects.entities;
 
-import collision.CircleCollider;
-import collision.Collider;
-import collision.CollisionDetection;
-import geometry.Vector;
-import objects.RenderLayer.LayerID;
+import components.collision.BoxCollider;
+import components.collision.CircleCollider;
+import components.collision.Collider;
+import components.collision.CollisionDetection;
+import main.geometry.Vector;
+import main.rendering.RenderLayer.LayerID;
+import objects.AnimatedObject;
 
 public class Coin extends AnimatedObject implements CollisionDetection{
 	
 	private static SpriteSheet sheet = new SpriteSheet("coin.png", 12, 12);
 
 	public Coin(Vector pos) {
-		super(pos, 100, 0, sheet.getSprites(), 3, LayerID.OBJECTS);
-		addComponent(new CircleCollider(this, 6*3));
+		super(pos, 100, 0, sheet.getSprites(), 3, LayerID.ITEMS);
+		addComponent(new BoxCollider(this, new Vector(3, 0), 12*3-6, 12*3));
 	}
 
 	@Override

@@ -1,9 +1,14 @@
-package collision;
+package components.collision;
 
-import geometry.Vector;
+import main.geometry.Vector;
+import main.rendering.FrameRenderer;
 import objects.RenderObject;
-import screen.FrameRenderer;
 
+/**
+ * TODO replace radius with Circle bounds object
+ * @author jaydenlefebvre
+ *
+ */
 public class CircleCollider extends Collider {
 
 	private double radius;
@@ -44,5 +49,11 @@ public class CircleCollider extends Collider {
 	
 	public String toString(){
 		return "Circle "+super.toString();
+	}
+
+	@Override
+	public boolean isCollidingWith(BoxCollider other) {
+		// TODO Auto-generated method stub
+		return other.isCollidingWith(this);
 	}
 }

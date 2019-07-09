@@ -3,9 +3,9 @@ package objects;
 import java.util.ArrayList;
 
 import components.Component;
-import geometry.Vector;
 import main.Renderable;
-import objects.RenderLayer.LayerID;
+import main.geometry.Vector;
+import main.rendering.RenderLayer.LayerID;
 
 /**
  * Parent class for ALL graphical objects
@@ -18,7 +18,7 @@ public abstract class RenderObject implements Renderable{
 	protected ArrayList<Component> components = new ArrayList<Component>();		//List of attached components
 	protected LayerID renderlayer;
 	
-	RenderObject(Vector pos, LayerID renderlayer) {
+	protected RenderObject(Vector pos, LayerID renderlayer) {
 		this.pos = pos;
 		this.renderlayer = renderlayer;
 	}

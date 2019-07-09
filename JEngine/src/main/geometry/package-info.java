@@ -5,4 +5,4 @@
  * @author jaydenlefebvre
  *
  */
-package collision;
+package main.geometry;

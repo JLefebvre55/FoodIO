@@ -1,4 +1,4 @@
-package screen;
+package main.rendering;
 
 import java.awt.Canvas;
 import java.awt.Dimension;

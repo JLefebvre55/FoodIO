@@ -1,4 +1,4 @@
-package collision;
+package components.collision;
 
 public interface CollisionDetection {
 	
