@@ -38,5 +38,10 @@ public abstract class FollowComponent extends Component {
 	public Vector getPos() {
 		return pos;
 	}
+	
+	public Vector getDelta() {
+		// TODO Auto-generated method stub
+		return delta;
+	}
 
 }

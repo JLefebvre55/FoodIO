@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import components.Component;
 import components.Keyboard;
-import components.collision.CircleCollider;
 import components.collision.Collider;
 import components.collision.CollisionDetection;
 import main.rendering.FrameRenderer;

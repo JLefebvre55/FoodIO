@@ -1,7 +1,5 @@
 package components.collision;
 
-import java.awt.Rectangle;
-
 import main.geometry.Vector;
 import main.rendering.FrameRenderer;
 import objects.RenderObject;
@@ -18,6 +16,10 @@ public class BoxCollider extends Collider {
 		super(parent, delta);
 		this.width = width;
 		this.height = height;
+	}
+
+	public BoxCollider(BoxCollider other, RenderObject parent) {
+		this(parent, other.getDelta(), other.getWidth(), other.getHeight());
 	}
 
 	@Override

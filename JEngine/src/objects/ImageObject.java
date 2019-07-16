@@ -92,5 +92,13 @@ public abstract class ImageObject extends RenderObject {
 	public String toString() {
 		return "Image "+super.toString();
 	}
+	
+	public int getWidth() {
+		return getImage().getWidth();
+	}
+	
+	public int getHeight() {
+		return getImage().getHeight();
+	}
 
 }

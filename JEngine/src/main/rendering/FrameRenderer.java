@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import main.geometry.Vector;
-import objects.ImageObject;
 
 /**
  * Renderer for screen frames. ALL update calls must use this.

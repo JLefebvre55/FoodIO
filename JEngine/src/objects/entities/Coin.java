@@ -1,7 +1,6 @@
 package objects.entities;
 
 import components.collision.BoxCollider;
-import components.collision.CircleCollider;
 import components.collision.Collider;
 import components.collision.CollisionDetection;
 import main.geometry.Vector;

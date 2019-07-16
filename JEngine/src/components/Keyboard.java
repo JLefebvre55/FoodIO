@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import main.Driver;
+import main.geometry.Direction;
 import main.rendering.FrameRenderer;
 
 /**
@@ -143,6 +144,16 @@ public class Keyboard extends Component implements KeyListener{
 	 */
 	public boolean isAction() {
 		return action;
+	}
+
+	public boolean isMove() {
+		// TODO Auto-generated method stub
+		return moveright || moveleft || moveup || movedown;
+	}
+
+	public Direction getMove() {
+		// TODO Auto-generated method stub
+		return moveup ? Direction.UP : movedown ? Direction.DOWN : moveleft ? Direction.LEFT : moveright ? Direction.RIGHT : null;
 	}
 	
 	

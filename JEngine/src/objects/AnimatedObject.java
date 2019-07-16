@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import main.geometry.Vector;
-import main.rendering.FrameRenderer;
 import main.rendering.RenderLayer.LayerID;
 
 /**
