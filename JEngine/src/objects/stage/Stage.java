@@ -3,10 +3,6 @@ package objects.stage;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import components.collision.CircleCollider;
-import components.collision.Collider;
-import components.collision.CollisionDetection;
-import main.Renderable;
 import main.rendering.FrameRenderer;
 import objects.RenderObject;
 

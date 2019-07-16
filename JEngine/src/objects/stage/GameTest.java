@@ -1,7 +1,5 @@
 package objects.stage;
 
-import java.awt.Color;
-
 import main.Driver;
 import main.geometry.Vector;
 import objects.Grid;

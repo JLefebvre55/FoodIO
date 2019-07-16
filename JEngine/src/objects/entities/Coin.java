@@ -1,7 +1,6 @@
 package objects.entities;
 
 import components.collision.BoxCollider;
-import components.collision.CircleCollider;
 import components.collision.Collider;
 import components.collision.CollisionDetection;
 import main.geometry.Vector;
@@ -9,8 +8,7 @@ import main.rendering.RenderLayer.LayerID;
 import objects.AnimatedObject;
 
 public class Coin extends AnimatedObject implements CollisionDetection{
-	
-	private static SpriteSheet sheet = new SpriteSheet("coin.png", 12, 12);
+	private static SpriteSheet sheet = new SpriteSheet("JEngine/coin.png", 12, 12);
 
 	public Coin(Vector pos) {
 		super(pos, 100, 0, sheet.getSprites(), 3, LayerID.ITEMS);

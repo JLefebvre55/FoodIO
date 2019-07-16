@@ -15,7 +15,7 @@ public class Apple extends ImageObject implements CollisionDetection{
 	private double speed = 2, radius = 50;
 
 	public Apple(Vector pos) {
-		super(pos, "apple.png", LayerID.CHARACTERS, 0.05);
+		super(pos, "JEngine/apple.png", LayerID.CHARACTERS, 0.05);
 		addComponent(new CircleCollider(this, radius+3));
 		addComponent(keyboard);
 	}

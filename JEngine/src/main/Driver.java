@@ -5,13 +5,12 @@ import java.util.ArrayList;
 
 import components.Component;
 import components.Keyboard;
-import components.collision.CircleCollider;
 import components.collision.Collider;
 import components.collision.CollisionDetection;
 import main.rendering.FrameRenderer;
 import main.rendering.RenderLayer;
-import main.rendering.Window;
 import main.rendering.RenderLayer.LayerID;
+import main.rendering.Window;
 import objects.RenderObject;
 import objects.stage.GameTest;
 import objects.stage.Stage;
