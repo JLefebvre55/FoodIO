@@ -28,7 +28,7 @@ public class BoxCollider extends Collider {
 
 	private double clamp(double x, double min, double max) {
 		// TODO Auto-generated method stub
-		return x < min ? min : x > max ? max : min;
+		return x < min ? min : x > max ? max : x;
 	}
 	
 	private Vector clamp(Vector v, Vector min, Vector max) {

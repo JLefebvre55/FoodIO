@@ -56,4 +56,13 @@ public class CircleCollider extends Collider {
 		// TODO Auto-generated method stub
 		return other.isCollidingWith(this);
 	}
+
+	/**
+	 * @param radius the radius to set
+	 */
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+
+	
 }

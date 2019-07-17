@@ -54,7 +54,7 @@ public abstract class RenderObject implements Renderable{
 		ArrayList<T> temp = new ArrayList<T>();
 		for(Component c : components) {
 			if(a.isInstance(c)) {
-				temp.add((T)c);
+				temp.add(a.cast(c));
 			}
 		}
 		return temp;
