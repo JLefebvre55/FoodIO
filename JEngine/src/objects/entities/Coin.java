@@ -9,6 +9,7 @@ import objects.AnimatedObject;
 
 public class Coin extends AnimatedObject implements CollisionDetection{
 	private static SpriteSheet sheet = new SpriteSheet("JEngine/coin.png", 12, 12);
+	public static final double MASS = 30;
 
 	public Coin(Vector pos) {
 		super(pos, 100, 0, sheet.getSprites(), 3, LayerID.ITEMS);

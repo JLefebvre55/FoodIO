@@ -50,11 +50,11 @@ public abstract class RenderObject implements Renderable{
 		}
 	}
 	
-	public <T> ArrayList<T> getComponentsByType(Class<T> a){
+	public <T extends Component> ArrayList<T> getComponentsByType(Class<T> cls){
 		ArrayList<T> temp = new ArrayList<T>();
 		for(Component c : components) {
-			if(a.isInstance(c)) {
-				temp.add(a.cast(c));
+			if(cls.isInstance(c)) {
+				temp.add(cls.cast(c));
 			}
 		}
 		return temp;

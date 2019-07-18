@@ -1,22 +1,31 @@
 package objects.stage;
 
+import java.util.ArrayList;
+
 import main.Driver;
 import main.geometry.Vector;
 import objects.Grid;
-import objects.entities.Player;
 import objects.entities.Coin;
+import objects.entities.Player;
 
 public class GameTest extends Stage {
 	
-	private static int numballs = 10;
+	private static int numballs = 15;
 
 	public GameTest() {
 		super("Interactive Test Stage");
 		addObject(new Player(new Vector(100,100)));
-		addObject(new Grid(25));
+		//addObject(new Grid(25));
 		
 		for(int i = 0; i < numballs; i++) {
-			addObject(new Coin(new Vector(Math.random()*Driver.getWidth(),Math.random()*Driver.getHeight())));
+			addObject(new Coin(randomVectorInBounds()));
+		}
+	}
+
+	@Override
+	public void refreshStage() {
+		if(getObjectsByType(Coin.class).size() < numballs){
+			addObject(new Coin(randomVectorInBounds()));
 		}
 	}
 }

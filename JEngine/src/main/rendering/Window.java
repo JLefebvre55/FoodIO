@@ -23,6 +23,10 @@ public class Window {
 	 * @param width
 	 * @param height
 	 */
+	public Window(int width, int height){
+		this("", width, height);
+	}
+
 	public Window(String title, int width, int height){
 		this.height = height;
 		this.width = width;

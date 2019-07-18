@@ -25,6 +25,7 @@ import objects.stage.Stage;
  * TODO Collision object??
  * TODO Comments (class and method), private/public rejig
  * TODO more debug messages
+ * TODO how to integrate dual lists between HERE and STAGE? removing objects?
  */
 public class Driver {
 
@@ -39,7 +40,6 @@ public class Driver {
 	public static final boolean DEBUG = true;
 	private static Stage currentStage;
 	private static ArrayList<RenderLayer> renderlayers = new ArrayList<RenderLayer>();
-	private static ArrayList<RenderObject> fupdateobjects = new ArrayList<RenderObject>();
 
 
 	/**
@@ -83,15 +83,15 @@ public class Driver {
 	public static void update() {
 		FrameRenderer renderer = currentStage.getFrameRenderer(width, height);
 		//Renders each layer in order
-		for(int i = 0; i < LayerID.size(); i++) {
-			for(RenderLayer layer : renderlayers ) {
-				//Find first layer
-				if(layer.getLayerID().ordinal() == i) {
-					//Do all
-					for(Renderable e : layer) {
-						e.update(renderer);
+		for (LayerID layer : LayerID.values()) {
+			for(RenderObject e : currentStage.getObjectsByLayer(layer)){
+				e.update(renderer);
+			}
+			if(layer.equals(LayerID.GUI)){
+				for(RenderObject e : currentStage.getObjects()){
+					for(Component c : e.getComponents()){
+						c.update(renderer);
 					}
-					break;
 				}
 			}
 		}
@@ -101,6 +101,9 @@ public class Driver {
 	}
 
 	public static void fixedUpdate() {
+
+		ArrayList<RenderObject> fupdateobjects = currentStage.getObjects();
+
 		for(RenderObject e : fupdateobjects) {
 			e.fixedUpdate();
 			e.fupdateComponents();
@@ -125,6 +128,8 @@ public class Driver {
 			}
 
 		}
+
+		currentStage.refreshStage();
 	}
 
 	/**
@@ -138,13 +143,13 @@ public class Driver {
 			renderlayers.add(new RenderLayer(LayerID.getLayerID(i)));
 		}
 
+		window = new Window(width, height);
+		window.getCanvas().createBufferStrategy(3);
+
 		//Set up stage
 		currentStage = new GameTest();
 
-		window = new Window(currentStage.getStageID(), width, height);
-		window.getCanvas().createBufferStrategy(3);
-
-		registerStage(currentStage);
+		//registerStage(currentStage);
 
 		//Flush out some frames before we make it visible
 		flushFrames();
@@ -160,70 +165,14 @@ public class Driver {
 		}
 	}
 
-	/**
-	 * Register a renderable object to the update list
-	 * @param e - object
-	 * @param id - ui layer to render on
-	 */
-	public static void registerObject(RenderObject e) {
-		for(RenderLayer layer : renderlayers) {
-			if(layer.getLayerID().equals(e.getLayerID())) {
-				layer.add(e);
-				fupdateobjects.add(e);
-				if(DEBUG)
-					System.out.println("Registered an object: "+e);
-				break;
-			}
-		}
-		for(Component c : e.getComponents()) {
-			if(c instanceof Keyboard) {
-				window.getCanvas().addKeyListener((Keyboard)c);
-			}
-			if(c.isGraphical()) {
-				for(RenderLayer layer : renderlayers) {
-					if(layer.getLayerID().equals(LayerID.GUI)) {
-						layer.add(c);
-						if(DEBUG)
-							System.out.println("- Registered a component: "+c);
-					}
-				}
-			}
-		}
-	}
-
-	public static void registerStage(Stage s) {
-		ArrayList<RenderObject> o = s.getObjects();
-
-		for(RenderObject e : o) {
-			registerObject(e);
-		}
-		if(DEBUG)
-			System.out.println("Registered stage: "+s.getStageID());
-	}
-
 	public static void delete(RenderObject e) {
 		//Remove object
-		fupdateobjects.remove(e);
-		for(RenderLayer layer : renderlayers) {
-			if(layer.getLayerID().equals(e.getLayerID())) {
-				layer.remove(e);
-				break;
-			}
-		}
+		currentStage.removeObject(e);
+
 		if(DEBUG) {
 			System.out.println("Removed object: "+e);
 		}
 
-		for(RenderLayer layer : renderlayers) {
-			if(layer.getLayerID().equals(LayerID.GUI)) {
-				for(Component c : e.getComponents()) {
-					layer.remove(c);
-					if(DEBUG) {
-						System.out.println("- Removed component: "+c);
-					}
-				}
-			}
-		}
 	}
 
 	/**
@@ -238,6 +187,10 @@ public class Driver {
 	 */
 	public static int getHeight() {
 		return height;
+	}
+
+	public static Window getWindow() {
+		return window;
 	}
 
 }
