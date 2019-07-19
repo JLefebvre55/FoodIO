@@ -5,4 +5,4 @@
  * @author jaydenlefebvre
  *
  */
-package screen;
+package objects.entities;

@@ -1,23 +1,25 @@
-package objects;
+package main.rendering;
 
 import java.util.ArrayList;
+
+import main.Renderable;
 
 /**
  * Placeholder class for a layer in rendering
  * @author jaydenlefebvre
  *
  */
-public class UILayer extends ArrayList<Renderable>{
+public class RenderLayer extends ArrayList<Renderable>{
 	
-	public static enum UILayerID {
-		BACKGROUND, OBJECTS, GUI;
+	public static enum LayerID {
+		BACKGROUND, CHARACTERS, ITEMS, GUI;
 		
 		/**
 		 * Get the ordinal of a specific layer
 		 * @param id - The layer
 		 * @return ordinal
 		 */
-		public static int getLayerIndex(UILayerID id) {
+		public static int getLayerIndex(LayerID id) {
 			return id.ordinal();
 		}
 		
@@ -34,22 +36,22 @@ public class UILayer extends ArrayList<Renderable>{
 		 * @param i - ordinal
 		 * @return the layer
 		 */
-		public static UILayerID getLayerID(int i) {
-			return UILayerID.values()[i];
+		public static LayerID getLayerID(int i) {
+			return LayerID.values()[i];
 		}
 		
 		public static int size() {
-			return UILayerID.values().length;
+			return LayerID.values().length;
 		}
 	}
 	
-	private UILayerID layer;
+	private LayerID layer;
 	
-	public UILayer(UILayerID layer) {
+	public RenderLayer(LayerID layer) {
 		this.layer = layer;
 	}
 	
-	public UILayerID getLayerID() {
+	public LayerID getLayerID() {
 		return layer;
 	}
 }

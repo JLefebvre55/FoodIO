@@ -1,13 +1,13 @@
 package main;
 
-import screen.FrameRenderer;
+import main.rendering.FrameRenderer;
 
 /**
- * ALL renderables must utilize update to be updated by main class
+ * ALL renderable objects must utilize update to be updated by main class
  * @author jaydenlefebvre
  *
  */
-public interface Engine {
+public interface Renderable {
 
 	/**
 	 * Update an object's render to a frame.
