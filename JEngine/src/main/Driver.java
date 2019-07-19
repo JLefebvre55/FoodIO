@@ -4,7 +4,6 @@ import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 
 import components.Component;
-import components.Keyboard;
 import components.collision.Collider;
 import components.collision.CollisionDetection;
 import main.rendering.FrameRenderer;
@@ -119,8 +118,11 @@ public class Driver {
 						//BY COLLIDER TYPE
 						//TODO generic call, then sort instanceof
 						if(ca.isCollidingWith(cb)){
-							CollisionDetection c = (CollisionDetection)ca.getParent();
-							c.collisionDetected(cb);
+							CollisionDetection x = (CollisionDetection)ca.getParent();
+							CollisionDetection y = (CollisionDetection)cb.getParent();
+							x.collisionDetected(cb);
+							y.collisionDetected(ca);
+							
 							System.out.println(ca+" on "+ca.getParent()+" is colliding with "+cb+" on "+cb.getParent()+"!");
 						}
 					}

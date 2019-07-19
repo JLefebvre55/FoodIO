@@ -1,11 +1,9 @@
 package objects.stage;
 
-import java.util.ArrayList;
-
-import main.Driver;
+import components.input.KeySet;
 import main.geometry.Vector;
-import objects.Grid;
 import objects.entities.Coin;
+import objects.entities.JellyGuy;
 import objects.entities.Player;
 
 public class GameTest extends Stage {
@@ -14,7 +12,8 @@ public class GameTest extends Stage {
 
 	public GameTest() {
 		super("Interactive Test Stage");
-		addObject(new Player(new Vector(100,100)));
+		addObject(new Player(new Vector(100,100), KeySet.PLAYERONE));
+		addObject(new Player(new Vector(400,400), KeySet.PLAYERTWO));
 		//addObject(new Grid(25));
 		
 		for(int i = 0; i < numballs; i++) {
