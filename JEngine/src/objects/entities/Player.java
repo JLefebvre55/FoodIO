@@ -12,11 +12,15 @@ public class Player extends JellyGuy {
 
 	private final PlayerKeyboard keyboard;
 
-    public Player(Vector pos, KeySet input) {
-		super(pos);
+    public Player(Vector pos, KeySet input, String name) {
+		super(pos, name);
 		keyboard = new PlayerKeyboard(input);
         addComponent(keyboard);
 		Driver.getWindow().getCanvas().addKeyListener(keyboard);
+	}
+
+	public Player(Vector pos, KeySet input) {
+		this(pos, input, "Unnamed");
     }
 
     @Override

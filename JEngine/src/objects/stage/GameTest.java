@@ -1,9 +1,11 @@
 package objects.stage;
 
+import java.awt.Color;
+
 import components.input.KeySet;
 import main.geometry.Vector;
+import objects.Grid;
 import objects.entities.Coin;
-import objects.entities.JellyGuy;
 import objects.entities.Player;
 
 public class GameTest extends Stage {
@@ -12,9 +14,9 @@ public class GameTest extends Stage {
 
 	public GameTest() {
 		super("Interactive Test Stage");
-		addObject(new Player(new Vector(100,100), KeySet.PLAYERONE));
-		addObject(new Player(new Vector(400,400), KeySet.PLAYERTWO));
-		//addObject(new Grid(25));
+		addObject(new Player(new Vector(100,100), KeySet.PLAYERONE, "Player 1"));
+		addObject(new Player(new Vector(400,400), KeySet.PLAYERTWO, "Player 2"));
+		addObject(new Grid(50, Color.GRAY));
 		
 		for(int i = 0; i < numballs; i++) {
 			addObject(new Coin(randomVectorInBounds()));

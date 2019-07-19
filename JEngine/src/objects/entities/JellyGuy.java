@@ -1,6 +1,7 @@
 package objects.entities;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.util.Random;
 
 import components.collision.CircleCollider;
@@ -95,7 +96,7 @@ public class JellyGuy extends RenderObject implements CollisionDetection {
 	}
 	
 	private void eat(JellyGuy enemy){
-		if(mass - enemy.getMass() > 20){
+		if(mass - enemy.getRadius() > 30){
 			Driver.delete(enemy);
 			System.out.println("MUNCH! "+this+" ate "+enemy);
 			mass+= enemy.getMass();
@@ -111,8 +112,8 @@ public class JellyGuy extends RenderObject implements CollisionDetection {
 		// TODO Auto-generated method stub
 		screen.getGraphics().setColor(playerColor);
 		screen.getGraphics().fillOval((int)pos.getX(), (int)pos.getY(), (int)getRadius()*2, (int)getRadius()*2);
-		screen.getGraphics().setColor(Color.BLACK);
-		screen.getGraphics().drawString(name, (int)(pos.getX()+getRadius()), (int)(pos.getY()+getRadius()));
+		screen.getGraphics().setColor(Color.WHITE);
+		screen.drawCenteredString(name, getCenter(), new Font(Font.SANS_SERIF, Font.BOLD, (int) (getRadius()/3)));
 	}
 	
 	/**
@@ -125,6 +126,10 @@ public class JellyGuy extends RenderObject implements CollisionDetection {
 	@Override
 	public void fixedUpdate() {
 		
+	}
+
+	public Vector getCenter(){
+		return new Vector(pos.getX()+getRadius(), pos.getY()+getRadius());
 	}
 	
 }

@@ -20,7 +20,6 @@ import objects.stage.Stage;
  * TODO scale? i.e. smaller screen; objects are shrunk to scale
  * TODO UI layers
  * TODO toString methods!!
- * TODO change all static, maybe framerenderer as well
  * TODO Collision object??
  * TODO Comments (class and method), private/public rejig
  * TODO more debug messages
@@ -36,7 +35,7 @@ public class Driver {
 	//Runtime vars
 	private static boolean running;
 	private static final long FUPDATE_NLENGTH = 10000000;
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	private static Stage currentStage;
 	private static ArrayList<RenderLayer> renderlayers = new ArrayList<RenderLayer>();
 
