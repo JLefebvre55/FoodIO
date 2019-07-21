@@ -39,7 +39,6 @@ public class Driver {
 	private static Stage currentStage;
 	private static ArrayList<RenderLayer> renderlayers = new ArrayList<RenderLayer>();
 
-
 	/**
 	 * Driver runtime code.
 	 * Fixed update every FUPDATE_NLENGTH nanoseconds
