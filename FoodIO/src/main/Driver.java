@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import components.Component;
 import components.collision.Collider;
 import components.collision.CollisionDetection;
+import main.geometry.Vector;
 import main.rendering.FrameRenderer;
-import main.rendering.RenderLayer;
 import main.rendering.RenderLayer.LayerID;
 import main.rendering.Window;
 import objects.RenderObject;
@@ -37,7 +37,6 @@ public class Driver {
 	private static final long FUPDATE_NLENGTH = 10000000;
 	public static final boolean DEBUG = false;
 	private static Stage currentStage;
-	private static ArrayList<RenderLayer> renderlayers = new ArrayList<RenderLayer>();
 
 	/**
 	 * Driver runtime code.
@@ -138,18 +137,11 @@ public class Driver {
 	private static void init() {
 		running = true;
 
-		//Set up layering and registry
-		for(int i = 0; i < LayerID.size(); i++) {
-			renderlayers.add(new RenderLayer(LayerID.getLayerID(i)));
-		}
-
 		window = new Window(width, height);
 		window.getCanvas().createBufferStrategy(3);
 
 		//Set up stage
 		currentStage = new GameTest();
-
-		//registerStage(currentStage);
 
 		//Flush out some frames before we make it visible
 		flushFrames();
@@ -191,6 +183,10 @@ public class Driver {
 
 	public static Window getWindow() {
 		return window;
+	}
+
+	public static Vector getCenter() {
+		return new Vector(getWidth()/2, getHeight()/2);
 	}
 
 }

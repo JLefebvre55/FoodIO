@@ -3,7 +3,6 @@ package components.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import components.Component;
 import main.Driver;
 import main.rendering.FrameRenderer;
 
@@ -13,13 +12,12 @@ import main.rendering.FrameRenderer;
 * @updatedby jaydenlefebvre
 *
 */
-public class PlayerKeyboard extends Component implements KeyListener{
+public class PlayerKeyboard extends Keyboard implements KeyListener{
 	
 	private boolean up, down, left, right;
 	private final int upkey, downkey, leftkey, rightkey; //boolean for if pressed or not
 
 	public PlayerKeyboard(int upkey, int downkey, int leftkey, int rightkey) {
-		super(null, false);
 		this.upkey = upkey;
 		this.downkey = downkey;
 		this.leftkey = leftkey;
