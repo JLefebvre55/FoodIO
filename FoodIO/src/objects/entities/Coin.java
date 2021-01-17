@@ -8,7 +8,7 @@ import main.rendering.RenderLayer.LayerID;
 import objects.AnimatedObject;
 
 public class Coin extends AnimatedObject implements CollisionDetection{
-	private static SpriteSheet sheet = new SpriteSheet("JEngine/coin.png", 12, 12);
+	private static SpriteSheet sheet = new SpriteSheet("FoodIO/coin.png", 12, 12);
 	public static final double MASS = 30;
 
 	public Coin(Vector pos) {

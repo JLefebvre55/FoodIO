@@ -1,6 +1,5 @@
 package components.collision;
 
-import java.awt.Rectangle;
 
 import main.geometry.Vector;
 import main.rendering.FrameRenderer;
